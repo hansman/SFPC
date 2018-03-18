@@ -52,7 +52,9 @@ class ofApp : public ofBaseApp{
         string sloganPart1;
         string sloganPart2;
     
-        int sloganWidth;
+        int sloganPartWidthLong;
+        int sloganPartWidthShort;
+        int sloganShortIndention;
         int sloganHeight;
         int spaceWidth;
         int currentState;
