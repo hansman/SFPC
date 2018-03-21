@@ -13,7 +13,7 @@ int main( ){
     
     ofAppGlutWindow window;
     window.setGlutDisplayString("rgba double samples>=4");
-    ofSetupOpenGL(1024,768,OF_WINDOW);
-    ofRunApp( new ofApp());
+    ofSetupOpenGL(1280, 760, OF_WINDOW);
+    ofRunApp(new ofApp());
 
 }

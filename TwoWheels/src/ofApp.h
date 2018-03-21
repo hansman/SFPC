@@ -37,8 +37,6 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
         void drawWheelWithOneTooth();
         void inwardToothWheel();
-        void drawToothWheel(int r, int x, int y, int count, int offset, float height, float width, int speed);
-        void inwardToothWheel(int r, int x, int y);
     
         void drawToothWheel(int r, int count, int offset, float toothHeight, float toothWidth);
         void drawToothWheelRotating(int r, int x, int y, int count, int offset, float toothHeight, float toothWidth, int speed);
@@ -52,8 +50,8 @@ class ofApp : public ofBaseApp{
         std::vector<float> waveform;
     
     
-        std::vector<ofPoint> evolvente1;
-        std::vector<ofPoint> evolvente2;
+        vector<ofPoint> evolvente1;
+        vector<ofPoint> evolvente2;
     
         ofSoundStream soundStream;
         int speed;
@@ -67,16 +65,7 @@ class ofApp : public ofBaseApp{
         double rotation1;
         double rotation1last;
     
-        intermittentWheel iw1;
-        intermittentWheel iw2;
-        intermittentWheel iw3;
-        intermittentWheel iw4;
-        intermittentWheel iw5;
-        intermittentWheel iw6;
-        intermittentWheel iw7;
-        intermittentWheel iw8;
-        intermittentWheel iw9;
-        intermittentWheel iw10;
+        vector<intermittentWheel> iws;
     
         ofSoundPlayer soundPlayer;
     
