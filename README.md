@@ -1,6 +1,4 @@
 This is a collection of code written throughout my studies at the **School For Poetic Computation** in NYC in Spring 2018.
-
-Classes attended:
  
  **Critical Thinking of Technology** by [Morehshin Allahyari](http://www.morehshin.com/)
 
