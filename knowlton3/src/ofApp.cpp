@@ -43,8 +43,6 @@ void ofApp::setup(){
     
     ofSort(images, sort_brightness);
     
-    images.push_back(img);
-    
     fbo.begin();
     ofClear(0, 0, 0, 255);
     ofSetColor(255);
@@ -71,11 +69,6 @@ void ofApp::setup(){
     }
     fbo.end();
     
-    ofPixels pixels;
-    fbo.readToPixels(pixels);
-    img.setFromPixels(pixels);
-    images.push_back(pixels);
-    idx = 0;
     
 }
 
