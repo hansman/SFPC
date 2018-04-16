@@ -26,6 +26,19 @@ void ofApp::setup(){
             frames2d[i][j].set(x,y);
         }
     }
+    
+    background.load("img13.jpg");
+    background.resize(1024,768);
+    
+    ofSeedRandom(0);
+    
+    for (int i = 0; i < 25; i++) {
+        randoms["blue"].push_back(ofRandom(0, 25));
+        randoms["green"].push_back(ofRandom(0, 25));
+        randoms["lila"].push_back(ofRandom(0, 25));
+        randoms["yellow"].push_back(ofRandom(0, 25));
+    }
+    
     //----------------------------------------------------------------
     
     ofBackground(0);
@@ -39,10 +52,9 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-
-    int distance = 200;     // distance between each walking man
-    int size = 7;           // size of each element of the man
-    int timeFactor = 76;    // time between camera perspective switches
+    
+    ofSetColor(160);
+    background.draw(0, 0);
     
     
     ofPoint data3d[24];
@@ -56,50 +68,84 @@ void ofApp::draw(){
     }
     
     float time = ofGetElapsedTimef() * 10;
-    int opacity = (int)(time * 10.1) % 255;
+    
+    int opacity = ofMap(fmod(time, sceneDuration / 2), 0, (sceneDuration / 2), 0, 255);
     
     // switch camera perspective and position
-    if (((int)(time / timeFactor ) % 3) == 0) {
-        // front
+    if (((int)(time / (sceneDuration * 2) ) % 3) == 0) { // front
+        cam.enableOrtho();
         cam.setOrientation(ofVec3f(0, 0, 1));
         cam.setGlobalPosition(0, 0, 665.107);
-    } else if (((int)(time / timeFactor ) % 3) == 1) {
-        // diagonal
+    } else if (((int)(time / (sceneDuration * 2) ) % 3) == 1) { // diagonal
+        cam.disableOrtho();
         cam.setGlobalOrientation(ofQuaternion(-0.1202, 0.256807, 0.0322075, 0.958418));
         cam.setGlobalPosition(322.254, 164.246, 558.161);
-    }  else if (((int)(time / timeFactor ) % 3) == 2) {
-        // side
+    }  else if (((int)(time / (sceneDuration * 2) ) % 3) == 2) { // side
+        cam.enableOrtho();
         cam.setGlobalOrientation(ofQuaternion(0.00305331, 0.665469, -0.00272219, 0.746414));
         cam.setGlobalPosition(660.727, -5.44134, 76.0105);
     }
 
     /**
      * measure camera perspective and position
+     * cout << "global orientation "  << cam.getGlobalOrientation() << endl;
      * cout << "global position "  << cam.getGlobalPosition() << endl;
-     *  cout << "global orientation "  << cam.getGlobalOrientation() << endl;
      */
     
     cam.begin();
-    cam.enableOrtho();
     
-    // draw each walking man
+    
+    // draw each man
     for (int i = 0; i < 24; i++) {
         
         float x = data3d[i].x;
         float y = data3d[i].y;
         float z = data3d[i].z;
         
-        ofSetColor(60, 120, 73, (opacity + 60) % 255); // green
+        // vera molnar colors
+        
+        // green man
+        int size = minElementSize + (i + 1) % 5;
+        
+        if (((int)(time / (sceneDuration / 2) ) % 4) == 1) {
+            ofSetColor(60, 120, 73, min(opacity + randoms["green"][i], 255) );
+        } else {
+            ofSetColor(60, 120, 73);
+        }
         ofDrawSphere(ofPoint(x,y, z + distance), size);
+
+        // blue man
+        size = minElementSize + (i + 2) % 5;
         
-        ofSetColor(213, 254, 254, (opacity + 120) % 255); // blue
-        ofDrawBox(ofPoint(x,y, z), size, size, size * 2);
+        if (((int)(time / (sceneDuration / 2) ) % 4) == 2) {
+            ofSetColor(213, 254, 254, min(opacity + randoms["blue"][i], 255));
+        } else {
+            ofSetColor(213, 254, 254);
+        }
+        ofDrawBox(ofPoint(x, y, z), size, size, size * 2);
         
-        ofSetColor(239, 225, 108, (opacity + 180) % 255); // yellow
-        ofDrawCylinder(ofPoint(x,y, z - distance), size, size * 2);
         
-        ofSetColor(101, 45, 183, (opacity + 240) % 255); // lila
-        ofDrawCone(ofPoint(x,y, z - distance * 2), size, size * 2);
+        // yellow man
+        size = minElementSize + (i + 3) % 5;
+        
+        if (((int)(time / (sceneDuration / 2) ) % 4) == 3) {
+            ofSetColor(239, 225, 108, min(opacity + randoms["yellow"][i], 255));
+        } else {
+            ofSetColor(239, 225, 108);
+        }
+        ofDrawCylinder(ofPoint(x, y, z - distance), size, size * 2);
+        
+        
+        // lila man
+        size = minElementSize + (i + 4) % 5;
+        
+        if (((int)(time / (sceneDuration / 2) ) % 4) == 0) {
+            ofSetColor(101, 45, 183, min(opacity + randoms["lila"][i], 255));
+        } else {
+            ofSetColor(101, 45, 183);
+        }
+        ofDrawCone(ofPoint(x, y, z - 2 * distance), size, size * 2);
+        
         
     }
     
@@ -119,7 +165,7 @@ void ofApp::keyReleased(int key){
 
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){
-    
+    // distance = mouseX;
 }
 
 //--------------------------------------------------------------
