@@ -12,4 +12,4 @@ This is a theory course for critical thinking of technology through the lens of 
 
  We will be soldering and breadboard. We will provide the basic materials and tools (soldering irons, wire cutters, oscilloscope, multimeters, power supplies), but if you have your own, feel free please bring them. You will need to use an Arduino for a class assignment in mid-March. We are not going to provide Arduinos for free, you will have an option to purchase your own or borrow from us.
 
- **Artistic Crafts** by [Kelli Anderson](http://kellianderson.com/) [Robby Craft](http://robbykraft.com/) [Pamala Liou](http://pamelaliou.com/)
+ **Artistic Crafts** by [Kelli Anderson](http://kellianderson.com/) [Robby Kraft](http://robbykraft.com/) [Pamala Liou](http://pamelaliou.com/)
